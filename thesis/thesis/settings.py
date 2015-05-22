@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_ROOT_PATH = os.path.dirname(__file__)
 
 
 # Quick-start development settings - unsuitable for production
@@ -23,12 +24,18 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'jr-=ab6z118uw*8w$1k7tsh+%ksl@2=@z7om=81gmmwn!0a$kz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'thesis/static')
+STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Application definition
 
@@ -60,7 +67,7 @@ ROOT_URLCONF = 'thesis.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ PROJECT_ROOT_PATH + "/__templates/",],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -82,6 +89,7 @@ WSGI_APPLICATION = 'thesis.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
@@ -93,7 +101,9 @@ DATABASES = {
         'PORT': '',                                         # Set to empty string for default.
     }
 }
-
+if DEBUG == False:
+    import dj_database_url
+    DATABASES['default'] =  dj_database_url.config()
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -107,9 +117,3 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
-
-STATIC_URL = '/static/'
