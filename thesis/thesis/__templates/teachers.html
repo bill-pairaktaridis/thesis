@@ -1,0 +1,44 @@
+{% extends "__base.html" %}
+
+{% block page_header %}Καθηγητές Εργαστηρίου{% endblock %}
+
+{% block top_menu %}
+    <li role="presentation"><a href="/">Home</a></li>
+    <li role="presentation"><a href="{% url 'subjects' %}">Αντικείμενα Έρευνας</a></li>
+    <li role="presentation"><a href="{% url 'services' %}">Παροχή Υπηρεσιών</a></li>
+    <li role="presentation" class="active"><a href="{% url 'teachers' %}">Καθηγητές</a></li>
+    <li role="presentation"><a href="{% url 'research_units' %}">Ερευνητικές Μονάδες</a></li>
+{% endblock %}
+  
+{% block page_lead %}
+<h3>Καθηγητές ΤΕΙ Αθήνας που υποβάλλουν την πρόταση</h3>
+
+{% for teacher in teachers %}
+    <div class="teacher-block">
+        <header><a href="{{teacher.link}}" target="_blank">{{teacher.name}}</a> - {{teacher.rank}} - {{teacher.school}}</header>
+        <p>{{teacher.bio}}</p>
+    </div>
+{% endfor %}
+
+
+
+{% endblock %}
+
+{% block page_content %}
+<p>Τα μέλη του εργαστηρίου έχουν πολυετή συνεργασία, συμμετοχή σε κοινά ερευνητικά προγράμματα, κοινό ερευνητικό έργο και δημοσιεύσεις. Βλέπε σχετικά και τα επισυναπτόμενα πλήρη βιογραφικά.</p>
+
+<p><br />
+</p>
+
+<p>Επιπλέον, έχουν πολυετή συνεργασία, συμμετοχή σε κοινά ερευνητικά προγράμματα, κοινό ερευνητικό έργο και δημοσιεύσεις με τους παρακάτω συνεργαζόμενους ερευνητές:</p>
+
+<p><br />
+</p>
+
+<p>Βασιλακόπουλος Μιχαήλ, Γάτος Βασίλης, Γιαννακόπουλος Γεώργιος, Γκρίτζαλης Στέφανος, Δέρβος Δημήτρης, Καμπουρλάζος Βασίλειος, Κεσίδης Αναστάσιος, Μαρινάγη Αικατερίνη, Μπέλσης Πέτρος, Ράλλη Αγγελική, Σκουρολιάκου Αικατερίνη, Karagiannis Dimitris, Ligozat Gérard.</p>
+
+<p><i>Επιστημονικοί και Εργαστηριακοί Συνεργάτες και συνεργάτες σε ερευνητικά προγράμματα</i></p>
+
+<p>Βάσσης Δημήτρης, Φράγγος Κωνσταντίνος, Φράγκου Παυλίνα</p>
+
+{% endblock %}

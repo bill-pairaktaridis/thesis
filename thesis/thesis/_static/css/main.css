@@ -1,0 +1,32 @@
+.jumbotron{
+    background: transparent;
+    padding-left: 0;
+}
+
+.teacher-block{
+    margin-bottom: 20px;
+}
+.teacher-block header{
+    font-size: 1.5em;
+    border-bottom: 1px solid #ccc;
+    padding: 0 5px 0 0;
+    margin-bottom: 10px;
+}
+
+.research-unit-block{
+    margin-bottom: 20px;
+}
+
+.research-unit-block header{
+    font-size: 1.6em;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+footer.footer{
+    padding: 10px 0;
+    margin: 10px 0;
+    border-top: 1px solid #dedede;
+}

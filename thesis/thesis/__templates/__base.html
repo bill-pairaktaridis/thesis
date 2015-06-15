@@ -1,3 +1,7 @@
+{% load staticfiles %}
+{% load url from future %}
+{% load i18n %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,13 +9,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title>Διαχείριση Δεδομένων, Πληροφορίας και Γνώσης</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -25,20 +31,26 @@
     <div class="container">
       <div class="header clearfix">
         <nav>
-          <ul class="nav nav-pills pull-right">
-            <li role="presentation" class="active"><a href="#">Home</a></li>
-            <li role="presentation"><a href="#">About</a></li>
-            <li role="presentation"><a href="#">Contact</a></li>
+          <ul class="nav nav-tabs pull-right">
+          {% block top_menu %}
+            <li role="presentation" class="active"><a href="/">Home</a></li>
+            <li role="presentation"><a href="{% url 'subjects' %}">Αντικείμενα Έρευνας</a></li>
+            <li role="presentation"><a href="{% url 'services' %}">Παροχή Υπηρεσιών</a></li>
+            <li role="presentation"><a href="{% url 'teachers' %}">Καθηγητές</a></li>
+            <li role="presentation"><a href="{% url 'essay' %}">Έκθεση Σκοπιμότητας</a></li>
+            <li role="presentation"><a href="{% url 'research_units' %}">Ερευνητικές Μονάδες</a></li>
+          {% endblock %}
           </ul>
         </nav>
-        <h3 class="text-muted">Project name</h3>
+        <h3 class="text-muted">Διαχείριση Δεδομένων, Πληροφορίας και Γνώσης</h3>
       </div>
 
       <div class="jumbotron">
         <h1>{% block page_header %}Hello world!{% endblock %}</h1>
 
-        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>
+        <p class="lead">{% block page_lead %} Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. {% endblock %} </p>
+
+        {#<p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>#}
       </div>
       {% block page_content %}
         <div class="row marketing">
@@ -67,7 +79,17 @@
       {% endblock %}
 
       <footer class="footer">
-        <p>&copy; Bill Pairaktaridis 2015</p>
+        &copy; Vasileios Pairaktaridis - TEI of Athens 2015
+
+
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation">
+            <a href="{% url 'research_volume' %}">Επιστημονικό Έργο</a>
+            </li>
+          </ul>
+        </nav>
+
       </footer>
 
     </div> <!-- /container -->

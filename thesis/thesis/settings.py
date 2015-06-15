@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.abspath(os.path.dirname(__file__)) + os.sep
 PROJECT_ROOT_PATH = os.path.dirname(__file__)
 
 
@@ -24,7 +24,7 @@ PROJECT_ROOT_PATH = os.path.dirname(__file__)
 SECRET_KEY = 'jr-=ab6z118uw*8w$1k7tsh+%ksl@2=@z7om=81gmmwn!0a$kz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -32,8 +32,27 @@ STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, '_static'),
 )
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
+
+# Absolute filesystem path to the directory that will hold user-uploaded files.
+# Example: "/var/www/example.com/media/"
+# MEDIA_ROOT = ''
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash.
+# Examples: "http://example.com/media/", "http://media.example.com/"
+MEDIA_URL = '/media/'
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
@@ -62,6 +81,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
+
 ROOT_URLCONF = 'thesis.urls'
 
 TEMPLATES = [
@@ -82,6 +102,8 @@ TEMPLATES = [
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
+    'django.core.context_processors.static',
+
 )
 
 WSGI_APPLICATION = 'thesis.wsgi.application'
@@ -101,6 +123,8 @@ DATABASES = {
         'PORT': '',                                         # Set to empty string for default.
     }
 }
+
+
 if DEBUG == False:
     import dj_database_url
     DATABASES['default'] =  dj_database_url.config()

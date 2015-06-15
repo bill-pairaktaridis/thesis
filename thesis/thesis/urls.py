@@ -19,5 +19,13 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^grappelli/', include('grappelli.urls')), # grappelli URLS
     url(r'^$', 'thesis.views.home', name='home'),
+
+    url(r'^subjects/$', 'thesis.views.subjects', name='subjects'),
+    url(r'^services/$', 'thesis.views.services', name='services'),
+    url(r'^teachers/$', 'thesis.views.teachers', name='teachers'),
+    url(r'^essay/$', 'thesis.views.essay', name='essay'),
+    url(r'^research_units/$', 'thesis.views.research_units', name='research_units'),
+    url(r'^research_volume/$', 'thesis.views.research_volume', name='research_volume'),
+    
     url(r'^admin/', include(admin.site.urls)),
 ]

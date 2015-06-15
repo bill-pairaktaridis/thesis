@@ -6,15 +6,16 @@ class Teacher(models.Model):
     name = models.CharField(max_length = 200)
     rank = models.CharField(max_length = 100)
     school = models.CharField(max_length = 100)
-    bio = models.CharField(max_length = 2000)
+    bio = models.CharField(max_length = 3000)
     link = models.CharField(max_length = 50)
-    research_unit = models.ForeignKey('ResearchUnit', null = True, blank = True)
+    # research_unit = models.ForeignKey('ResearchUnit', null = True, blank = True)
 
     def __unicode__(self):
         return "%s" % (self.name)
 
 class ResearchUnit(models.Model):
-    title = models.CharField(max_length = 100)
-    description = models.CharField(max_length = 200)
+    title = models.CharField(max_length = 200)
+    description = models.CharField(max_length = 2000)
+    teacher = models.ForeignKey('Teacher', null = True, blank = True)
     def __unicode__(self):
         return "%s" % (self.title)
